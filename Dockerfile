@@ -30,4 +30,4 @@ RUN npm install --legacy-peer-deps && npm run build
 RUN php artisan migrate --force || true
 EXPOSE 80
 
-CMD php artisan migrate --force && /usr/sbin/apache2ctl -D FOREGROUND
+CMD ["sh", "-c", "php artisan migrate --force && /usr/sbin/apache2ctl -D FOREGROUND"]
