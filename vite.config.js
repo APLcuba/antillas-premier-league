@@ -8,6 +8,9 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.jsx'],
             refresh: true,
         }),
-        react(),
+        react({
+            // 👇 AGREGAR ESTO
+            include: 'resources/js/pages/**/*.jsx',
+        }),
     ],
 });
