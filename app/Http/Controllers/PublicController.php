@@ -31,7 +31,7 @@ class PublicController extends Controller
             ->limit(5)
             ->get();
 
-        return inertia('Home', [
+        return inertia('Public/Home', [
             'standings' => $standings,
             'upcomingMatches' => $upcomingMatches,
             'latestNews' => $latestNews,
