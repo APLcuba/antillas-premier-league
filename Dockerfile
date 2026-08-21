@@ -32,7 +32,15 @@ RUN mkdir -p /var/www/html/storage && \
     touch /var/www/html/storage/database.sqlite && \
     php artisan migrate --force || true
 
-# 👇 ESTO ES LO NUEVO (apunta Apache a la carpeta public)
+# 👇 AGREGAR ESTO: Generar APP_KEY y crear .env
+RUN php artisan key:generate --force && \
+    echo "APP_ENV=production" > /var/www/html/.env && \
+    echo "APP_DEBUG=false" >> /var/www/html/.env && \
+    echo "APP_URL=https://antillas-premier-league.onrender.com" >> /var/www/html/.env && \
+    echo "DB_CONNECTION=sqlite" >> /var/www/html/.env && \
+    echo "DB_DATABASE=/var/www/html/storage/database.sqlite" >> /var/www/html/.env
+
+# Configurar Apache para que apunte a public
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf && \
     sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/apache2.conf && \
     a2enmod rewrite
