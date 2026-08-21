@@ -46,4 +46,8 @@ class HandleInertiaRequests extends Middleware
         // Reemplazar 'Pages/' por 'pages/'
         return str_replace('Pages/', 'pages/', $component);
     }
+    public function rootView(Request $request): ?string
+    {
+        return 'app';
+    }
 }
