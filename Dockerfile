@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     npm \
     && apt-get clean
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
