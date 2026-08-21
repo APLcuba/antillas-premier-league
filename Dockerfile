@@ -30,7 +30,7 @@ RUN npm install --legacy-peer-deps && npm run build
 
 # Crear base de datos con permisos correctos
 RUN mkdir -p /var/www/html/storage \
-    && touch /var/www/html/storage/database.sqlite \
+    && cp /var/www/html/database/database.sqlite /var/www/html/storage/database.sqlite \
     && chown www-data:www-data /var/www/html/storage/database.sqlite \
     && chmod 775 /var/www/html/storage/database.sqlite \
     && php artisan migrate --force || true
