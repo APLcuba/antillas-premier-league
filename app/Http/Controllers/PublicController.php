@@ -18,17 +18,18 @@ class PublicController extends Controller
             ->orderBy('points', 'desc')
             ->orderBy('goal_difference', 'desc')
             ->orderBy('goals_for', 'desc')
+            ->take(10)
             ->get();
 
         $upcomingMatches = Game::with(['homeTeam', 'awayTeam'])
             ->where('status', 'scheduled')
             ->orderBy('scheduled_date', 'asc')
-            ->limit(5)
+            ->take(5)
             ->get();
 
         $latestNews = News::where('is_published', true)
             ->orderBy('published_at', 'desc')
-            ->limit(5)
+            ->take(5)
             ->get();
 
         return inertia('Public/Home', [
