@@ -25,8 +25,7 @@ RUN chown -R www-data:www-data /var/www/html \
 RUN a2enmod rewrite
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
-RUN npm install && npm run build
-
+RUN npm install --legacy-peer-deps && npm run build
 EXPOSE 80
 
 CMD ["apache2-foreground"]
