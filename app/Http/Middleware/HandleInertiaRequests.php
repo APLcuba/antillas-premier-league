@@ -36,4 +36,14 @@ class HandleInertiaRequests extends Middleware
             ],
         ];
     }
+
+    /**
+     * Resolve the component path.
+     * 👇 AGREGAR ESTO
+     */
+    public function resolveComponent(string $component): string
+    {
+        // Reemplazar 'Pages/' por 'pages/'
+        return str_replace('Pages/', 'pages/', $component);
+    }
 }
