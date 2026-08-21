@@ -51,5 +51,7 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 
 EXPOSE 80
 
+# Forzar que Vite use HTTPS
+RUN echo "VITE_APP_URL=https://antillas-premier-league.onrender.com" >> /var/www/html/.env
 # CMD simple (los permisos ya están en el BUILD)
 CMD ["sh", "-c", "php artisan migrate --force || true && /usr/sbin/apache2ctl -D FOREGROUND"]
