@@ -26,6 +26,7 @@ RUN a2enmod rewrite
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 RUN npm install --legacy-peer-deps && npm run build
+RUN php artisan migrate --force || true
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD ["sh", "-c", "php artisan migrate --force && apache2-foreground"]
