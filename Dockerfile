@@ -26,7 +26,7 @@ RUN chown -R www-data:www-data /var/www/html \
 RUN a2enmod rewrite
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
-RUN npm install --legacy-peer-deps && npm run build
+RUN npm install --legacy-peer-deps && npx vite build --force
 
 # Crear base de datos con permisos correctos
 RUN mkdir -p /var/www/html/storage \
