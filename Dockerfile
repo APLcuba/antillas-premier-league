@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     npm \
     && apt-get clean
 
-# Instalar solo lo necesario (sin PostgreSQL)
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -32,6 +31,11 @@ RUN npm install --legacy-peer-deps && npm run build
 RUN mkdir -p /var/www/html/storage && \
     touch /var/www/html/storage/database.sqlite && \
     php artisan migrate --force || true
+
+# 👇 ESTO ES LO NUEVO (apunta Apache a la carpeta public)
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf && \
+    sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/apache2.conf && \
+    a2enmod rewrite
 
 EXPOSE 80
 
