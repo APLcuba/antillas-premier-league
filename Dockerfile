@@ -18,6 +18,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . /var/www/html
 
+COPY database/database.sqlite /var/www/html/database/database.sqlite
+
 # Permisos correctos desde el BUILD
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
@@ -31,8 +33,8 @@ RUN npm install --legacy-peer-deps && npm run build
 # Crear base de datos con permisos correctos
 RUN mkdir -p /var/www/html/storage \
     && cp /var/www/html/database/database.sqlite /var/www/html/storage/database.sqlite \
-    && chown www-data:www-data /var/www/html/storage/database.sqlite \
-    && chmod 775 /var/www/html/storage/database.sqlite \
+    && chown -R www-data:www-data /var/www/html/storage \
+    && chmod -R 775 /var/www/html/storage \
     && php artisan migrate --force || true
 
 # Crear .env
