@@ -26,9 +26,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-# Base de datos - Comenta esta línea si quieres subir tu SQLite con datos
+
+# Base de datos - Excluir todos los SQLite excepto el principal
 /database/*.sqlite
-/database/*.sqlite-journal
+!/database/database.sqlite
 
 # Archivos de entorno - NO SUBIR .env, pero SÍ .env.example
 !.env.example
