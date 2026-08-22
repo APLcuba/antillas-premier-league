@@ -7,12 +7,23 @@ import { createRoot } from 'react-dom/client';
 
 import axios from 'axios';
 
+// ✅ CONFIGURACIÓN PARA HTTPS
+axios.defaults.baseURL = window.location.origin;
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// ✅ INTERCEPTOR PARA FORZAR HTTPS
+axios.interceptors.request.use(config => {
+    if (config.url && typeof config.url === 'string' && config.url.startsWith('http://')) {
+        config.url = config.url.replace('http://', 'https://');
+    }
+    return config;
+});
+
 // Configurar CSRF automáticamente para todas las peticiones
 const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 if (token) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 }
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Antillas Premier League';
 
