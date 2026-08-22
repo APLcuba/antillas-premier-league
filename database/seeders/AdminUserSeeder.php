@@ -16,6 +16,7 @@ class AdminUserSeeder extends Seeder
                 'name' => 'Admin',
                 'last_name' => 'APL',
                 'email' => 'admin@antillas.com',
+                'email_verified_at' => now(), 
                 'password' => Hash::make('password123'),
                 'role' => 'admin',
                 'is_active' => true,
