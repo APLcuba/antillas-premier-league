@@ -73,6 +73,10 @@ Route::get('/reglamento', [PublicController::class, 'regulations'])->name('publi
 // Ruta para obtener notificaciones en JSON (para la campana)
 Route::get('/api/notifications-data', [NotificationController::class, 'getNotificationsData'])->middleware('auth');
 
+Route::get('/ping', function () {
+    return response()->json(['status' => 'ok', 'time' => now()]);
+});
+
 // ============================================
 // RUTAS DE NOTIFICACIONES Y COMENTARIOS (SOLO UNA VEZ)
 // ============================================
